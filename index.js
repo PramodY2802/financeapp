@@ -9,7 +9,11 @@ import loginRoutes from "./routes/loginRoutes.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:true,
+    credentials:true
+}));
+
 
 connectDB(); // Connect to MongoDB
 
