@@ -22,15 +22,27 @@ export const loginUser = async (req, res) => {
 };
 
 
-export const getuser = async (req, res) => {
+export const getuserid = async (req, res) => {
   try {
-    const user = await Login.findById(req.params.id);
-    res.json({ exists: !!user }); // Returns { exists: true } if user exists, otherwise { exists: false }
+    const userId = req.params.id;
+
+    if (!userId) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+    // ✅ Query using "id" field instead of "_id"
+    const user = await Login.findOne({ id: userId });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ exists: true, user }); // Send user data if found
   } catch (error) {
+    console.error("Error fetching user:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
-
 
 export const registerUser = async (req, res) => {
   try {
