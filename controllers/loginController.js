@@ -21,6 +21,17 @@ export const loginUser = async (req, res) => {
   }
 };
 
+
+export const getuser = async (req, res) => {
+  try {
+    const user = await Login.findById(req.params.id);
+    res.json({ exists: !!user }); // Returns { exists: true } if user exists, otherwise { exists: false }
+  } catch (error) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+
 export const registerUser = async (req, res) => {
   try {
     const { username, password } = req.body;
