@@ -21,6 +21,7 @@ export const loginUser = async (req, res) => {
   }
 };
 
+
 export const getuserid = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -42,7 +43,6 @@ export const getuserid = async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 };
-
 
 export const registerUser = async (req, res) => {
   try {
